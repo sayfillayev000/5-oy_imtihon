@@ -47,7 +47,7 @@ const createCountries = (countries) => {
     const region = country.region
     const capital = country.capital ? country.capital[0] : "No Capital"
     const flag = country.flags.svg
-    console.log(region);
+    // console.log(region);
     // li
     const li = document.createElement('li')
     li.classList.add('cards__item')
@@ -70,7 +70,7 @@ const createCountries = (countries) => {
 const cuntryInfoEl = document.querySelector('.country-info');
 const createCounryInfo = (country) => {
   const { population, borders, capital, flags, name, region, tld, currencies, languages, subregion } = country
-  console.log(borders)
+  // console.log(borders)
   const nativeName = Object.values(name.nativeName)[0].official
   const currency = Object.values(currencies)[0].name
   const language = Object.values(languages)
