@@ -24,7 +24,7 @@ const API = 'https://restcountries.com/v3.1/all';
 request(API).then((data) => {
   createCountries(data)
 }).catch((err) => {
-  alert(err.message)
+err.message
 })
 // about 
 const querySting = window.location.search
@@ -34,7 +34,7 @@ const countryAPI = `https://restcountries.com/v3.1/${country}`
 request(countryAPI).then((data) => {
   createCounryInfo(data[0])
 }).catch((err) => {
-  alert(err.message)
+  // alert(`error 2 ${err.message}`)
 });
 // update
 const cardsEl = document.querySelector('.cards')
@@ -175,7 +175,7 @@ searchSelect.forEach((li) => {
     request(filterAPI).then((data) => {
       createCountries(data)
     }).catch((err) => {
-      alert(err.message)
+      alert( `Siz xato kirityabsiz tekshirib qaytadan urinib ko'ring , ${err.message}`)
     })
   })
 })
