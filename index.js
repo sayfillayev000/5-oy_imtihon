@@ -7,7 +7,6 @@ const loaderToggler = (info) => {
     loaderEl.classList.add('hidden')
   }
 }
-loaderToggler
 // request
 const request = async (reource) => {
   loaderToggler(true)
@@ -24,7 +23,7 @@ const API = 'https://restcountries.com/v3.1/all';
 request(API).then((data) => {
   createCountries(data)
 }).catch((err) => {
-err.message
+  err.message
 })
 // about 
 const querySting = window.location.search
@@ -148,19 +147,46 @@ modeBtn.addEventListener('click', () => {
   modeFromLocal ? localStorage.setItem('mode', './img/luna.png') : localStorage.setItem('mode', 'dark')
 })
 // filter
-const searchFormEl = document.querySelector('.search')
-searchFormEl.search.addEventListener("input", () => {
-  const searchValue = searchFormEl.search.value.toLowerCase()
-  const cardsItem = document.querySelectorAll('.cards__item')
-  const cardsTitles = document.querySelectorAll('.cards__title')
-  cardsTitles.forEach((title, i) => {
+const searchFormEl = document.querySelector('.search')  // earch ni olib keldim 
+searchFormEl.search.addEventListener("input", () => { // .search desak input name ga bo'g'liq bo'ladi bu evenga input bo'ladi chunki harbir iyozganimizni tekshiradi
+  const searchValue = searchFormEl.search.value.toLowerCase(); // har bir yozganimizni kichkina harfga qilishimiz kerak uni tekshirishimiz uchun 
+  const cardsItems = document.querySelectorAll('.cards__item'); // cards__item larni olib kelishimiz kerak shuning uchun u querySelectorAll bo'ldi
+  const population = document.querySelectorAll('.population'); // cards__item larni olib kelishimiz kerak shuning uchun u querySelectorAll bo'ldi
+  const region = document.querySelectorAll('.region'); // cards__item larni olib kelishimiz kerak shuning uchun u querySelectorAll bo'ldi
+  const capital = document.querySelectorAll('.capital'); // cards__item larni olib kelishimiz kerak shuning uchun u querySelectorAll bo'ldi
+  const cardsTitles = document.querySelectorAll('.cards__title'); // cards__title larniham olishim kerak chunki hammasini tekshirishim kerak
+  //   nimaga bularni tashqarida elon qilmadim chunki hali malumot kelmagan bo'lishi mumkin xatolar chiqishi mumkin 
+  //  endi cards__title qidirsa inputga yozsa bu faqat title bo'yicha qidiradi buni atim lari bo'yicha qidiradigan ham qilsak bo'ladi 
+  // endi bu bizga NodeList da keladi buni Arrayga o'xshagan buni
+  cardsTitles.forEach((title, i) => { // endi har birini aylanib chiqishimi kerak chunki har biriga tegishli forEach ichiga function kiradi buning ichidagi ko'p titils lar ichidan har bittasi keladi  i bo'lsa o'sha title ni index raqami hisoblanadi
+    if (title.textContent.toLowerCase().includes(searchValue)) { // endi harbir title ni textContent chichkina qilib olib uni inputdan kelayongan malumot bilan tekshiramiz includes qidirish uchun ishladiladi . ta qoyib qayerdan qidirishi ichiga shu bormi degan narsani beramiz
+      cardsItems[i].style.display = 'block' // bunda cardsItems  lar ko'p shuning uchun uning i chisi i forEach dagi i bu index raqam shunga inline class berib qoyabmiz block deb agar true bo'lmasa xuddu shunga display ga none beramiz
+    }else{
+      cardsItems[i].style.display = 'none'
+    }
+  });
+  population.forEach((title, i) => {
     if (title.textContent.toLowerCase().includes(searchValue)) {
-      cardsItem[i].style.display = 'block'
-    } else {
-      cardsItem[i].style.display = 'none'
+      cardsItems[i].style.display = 'block'
+    }else{
+      // cardsItems[i].style.display = 'none'
     }
   })
-});
+  region.forEach((title, i) => {
+    if (title.textContent.toLowerCase().includes(searchValue)) {
+      cardsItems[i].style.display = 'block'
+    }else{
+      // cardsItems[i].style.display = 'none'
+    }
+  })
+  capital.forEach((title, i) => {
+    if (title.textContent.toLowerCase().includes(searchValue)) {
+      cardsItems[i].style.display = 'block'
+    } else {
+      // cardsItems[i].style.display = 'none'
+    }
+  })
+})
 const searchSelect = document.querySelectorAll('.search__select-list li')
 const searchSelectSpan = document.querySelector('.search__select span')
 searchSelect.forEach((li) => {
@@ -175,7 +201,7 @@ searchSelect.forEach((li) => {
     request(filterAPI).then((data) => {
       createCountries(data)
     }).catch((err) => {
-      alert( `Siz xato kirityabsiz tekshirib qaytadan urinib ko'ring , ${err.message}`)
+      alert(`Siz xato kirityabsiz tekshirib qaytadan urinib ko'ring , ${err.message}`)
     })
   })
 })
